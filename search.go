@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 )
@@ -53,7 +54,7 @@ func collectLogs(filepattern string, searchword string) []string {
 				break
 			}
 			if strings.Contains(line, searchword) {
-				log := fmt.Sprintf("%s %s", filename[4:12], line)
+				log := fmt.Sprintf("%s %s", path.Base(filename)[4:12], line)
 				logs = append(logs, log)
 			}
 		}

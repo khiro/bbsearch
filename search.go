@@ -65,7 +65,7 @@ func collectLogs(filepattern string, searchword string) []string {
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	f, _ := os.OpenFile("logfile.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 	l := log.New(f, "", log.Ldate|log.Lmicroseconds|log.Lshortfile)
-	l.Printf("%s %s %s %s\n", r.RequestURI, r.RemoteAddr, r.UserAgent(), r.Referer())
+	l.Printf("%s %s %s %s %s\n", r.RequestURI, r.Header["X-Forwarded-For"], r.RemoteAddr, r.UserAgent(), r.Referer())
 	defer f.Close()
 
 	searchword := r.FormValue("q")

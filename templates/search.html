@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+	<title>{{.Title | html}}</title>
+</head>
+
+<body>
+	<form method="GET" action="/">
+        <input name="q" type="text" value="{{.Query | html}}">
+		<button id="submit">Search</button>
+	</form>
+    <p>
+      {{.Result | html}} in 
+      <a href="https://stylex01.khiro.org/bb/">#bb Log</a>
+    </p>
+    <p>
+      {{range .Logs}}
+         {{. | html}}<br>
+      {{end}}
+    </p>
+</body>
+</html>

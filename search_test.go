@@ -1,4 +1,4 @@
-package main
+package bbsearch
 
 import (
 	"io/ioutil"

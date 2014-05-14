@@ -49,12 +49,13 @@ func collectLogs(filepattern string, searchword string) []string {
 	logfiles, _ := filepath.Glob(filepattern)
 	var logs = []string{}
 	for _, filename := range logfiles {
+		var day = strings.Split(path.Base(filename), "_")[1][0:8]
 		for line := range readLogFile(filename) {
 			if line == "" {
 				break
 			}
 			if strings.Contains(line, searchword) {
-				log := fmt.Sprintf("%s %s", path.Base(filename)[4:12], line)
+				log := fmt.Sprintf("%s %s", day, line)
 				logs = append(logs, log)
 			}
 		}
@@ -70,12 +71,16 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 
 	searchword := r.FormValue("q")
 
+	var filePatterns = []string{"*bb*.txt", "*general*.txt"}
 	var logs = []string{}
 	var result string = ""
 	if len(searchword) == 0 {
 		result = "You must input some words"
 	} else {
-		logs = collectLogs("*bb*.txt", searchword)
+		for _, value := range filePatterns {
+			hittedLogs := collectLogs(value, searchword)
+			logs = append(logs, hittedLogs...)
+		}
 		if len(logs) == 0 {
 			result = fmt.Sprintf("No result : %q", searchword)
 		} else {

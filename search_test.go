@@ -20,8 +20,7 @@ func check200Status(t *testing.T, url string) {
 	}
 }
 
-func checkSearchresponse(t *testing.T, url string) {
-	testFile := "bb_00000000.txt"
+func checkSearchresponse(t *testing.T, url string, testFile string) {
 	testLog := "Just a test!\r\n"
 	fout, err := os.Create(testFile)
 	if err != nil {
@@ -63,5 +62,6 @@ func TestServer(t *testing.T) {
 
 	check200Status(t, server.URL)
 	check200Status(t, server.URL+"/bbsearch")
-	checkSearchresponse(t, server.URL+"/bbsearch?q=test")
+	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "bb_00000000.txt")
+	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "general_00000000.txt")
 }

@@ -50,6 +50,10 @@ func checkSearchresponse(t *testing.T, url string, testFile string) {
 		t.Error("Search results error")
 	}
 
+	if strings.Contains(string(body), "general") == true {
+		t.Error("Search results format error")
+	}
+
 	err = os.Remove(testFile)
 	if err != nil {
 		t.Error("Test file remove error", err)
@@ -62,6 +66,7 @@ func TestServer(t *testing.T) {
 
 	check200Status(t, server.URL)
 	check200Status(t, server.URL+"/bbsearch")
-	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "bb_00000000.txt")
-	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "general_00000000.txt")
+	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "#bb_00000000.txt")
+	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "#general_00000000.txt")
+	checkSearchresponse(t, server.URL+"/bbsearch?q=test", "default_#general_00000000.txt")
 }

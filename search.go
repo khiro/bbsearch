@@ -48,8 +48,13 @@ func readLogFile(filename string) chan string {
 func collectLogs(filepattern string, searchword string) []string {
 	logfiles, _ := filepath.Glob(filepattern)
 	var logs = []string{}
+	var day = ""
 	for _, filename := range logfiles {
-		var day = strings.Split(path.Base(filename), "_")[1][0:8]
+		if len(strings.Split(path.Base(filename), "_")) == 3 {
+			day = strings.Split(path.Base(filename), "_")[2][0:8]
+		} else {
+			day = strings.Split(path.Base(filename), "_")[1][0:8]
+		}
 		for line := range readLogFile(filename) {
 			if line == "" {
 				break

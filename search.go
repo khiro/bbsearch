@@ -108,7 +108,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		fmt.Errorf("mainTemplate: %v", err)
+		fmt.Println("mainTemplate: ", err)
 	}
 }
 

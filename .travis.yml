@@ -12,4 +12,8 @@ before_install:
 
 
 script:
- - $HOME/gopath/bin/goveralls -repotoken hvrfwVpTF8dfVSTzyVCQfM0QlL0RzMRJl
+ - $HOME/gopath/bin/goveralls -repotoken $COVERALLS_TOKEN
+
+env:
+  global:
+    secure: "jqe3HU9kxygPPnSh/V7ffIra/qUTgYvLsJnCR+MChNJYSxpJPs0uK2+uK6dnQzKel2LfuyABsLzlNpNJE0pijR1d88bzQ9VxM4BGJ+Qv1AyG2CeM7a08eeZVlU77LvBOHjaFDIruoJMFwsv7DzudzPZzc/FAtMkO/4RbIs+VGAA="

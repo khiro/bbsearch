@@ -18,7 +18,7 @@ test: vet
 	go test ./...
 
 test-cov: 
-	go test -cover -o=$(COV_FILE)
+	go test -coverprofile=$(COV_FILE) -covermode=count
 
 clean:
 	rm -rf $(CMD)
